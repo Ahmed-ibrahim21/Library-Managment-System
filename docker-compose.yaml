@@ -1,0 +1,17 @@
+version: "3"
+services:
+  my-app:
+    build: ./frontend
+    container_name: Front_container
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+  java_service:
+    build: ./demo
+    container_name: java_service_container
+    ports:
+      - "8080:8080"
+
+    restart: on-failure
