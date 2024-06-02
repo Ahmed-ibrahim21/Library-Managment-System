@@ -1,0 +1,23 @@
+# Use a Node.js image as the base image
+FROM node:16-alpine AS build
+
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json files into the container
+COPY package.json package-lock.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application source code into the container
+COPY . .
+
+# Build the React application
+RUN npm run build
+
+# Expose port 3000 (default port for React development server)
+EXPOSE 3000
+
+# Start the React app
+CMD ["npm", "start"]
